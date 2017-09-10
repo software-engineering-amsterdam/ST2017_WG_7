@@ -1,6 +1,5 @@
 module Lab1 where
 import Data.List
-import Data.Numbers.Primes
 
 -- Observations
 -- Smallest counterexample: [2,3,5,7,11,13]
@@ -18,7 +17,7 @@ primes_list n =
     take n my_primes
 
 conjecture_contraexample n = 
-    if isPrime (product(primes_list n) + 1) then conjecture_contraexample (n + 1) else primes_list n
+    if prime (product(primes_list n) + 1) then conjecture_contraexample (n + 1) else primes_list n
 
 -- 1 && 2 -> Lab 1
 
