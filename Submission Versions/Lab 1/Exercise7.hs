@@ -66,3 +66,7 @@ luhnTestList = [(1, False),
                 (936502673, True)]
 
 -- Time: 3 hours
+
+-- Erik van Scharrenburg
+-- We chose this implementation because the separated functions in the where
+-- blocks make the code easy to read.
