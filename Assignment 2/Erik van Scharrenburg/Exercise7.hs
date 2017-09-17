@@ -3,7 +3,7 @@ import Data.List
 import Data.Char
 import System.Random
 import Test.QuickCheck
-import Exercise6
+import Data.Maybe
 
 -- Implementing and testing IBAN validation
 -- Exercise 7
@@ -29,9 +29,9 @@ moveFirstFour xs = snd halves ++ fst halves
 charsToDigits :: String -> String
 charsToDigits [] = []
 charsToDigits (x:xs)
-  | index /= -1 = show (index + 10) ++ charsToDigits xs
+  | isJust index = show (fromJust index + 10) ++ charsToDigits xs
   | otherwise   = x : charsToDigits xs
-  where index = elemIndex' x ['A'..'Z']
+  where index = elemIndex x ['A'..'Z']
 
 ibanTest :: Property
 ibanTest = forAll ibanTestListGen ibt
