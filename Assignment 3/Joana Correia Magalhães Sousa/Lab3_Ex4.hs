@@ -53,7 +53,7 @@ getForm d = do
 
 
 
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 --After applying the cnf function, the result and its original form
 --must be equivalent
@@ -61,10 +61,34 @@ property1:: Form -> Bool
 property1 f = equiv (cnf f) f
 
 --After applying the cnf function, the result must be a cnj of dsj
---property2
+property2::Form -> Bool
+property2 f = if tautology (cnf f) then True else check(cnf f)
 
-{--tester::[Form] -> (Form -> Bool) -> IO ()
-tester [] _ = putStrLn "All passed"
+check::Form -> Bool
+check (Cnj fs) = allDsj fs
+check (Dsj fs) = allLit fs
+check (Prop c) = True
+check (Neg(Prop c)) = True
+check _ = False
+
+allDsj::[Form] -> Bool
+allDsj [] = True
+allDsj ((Cnj f):fs) = (allDsj f) && (allDsj fs)
+allDsj ((Dsj f):fs) = (allDsj fs) && (allLit f)
+allDsj ((Prop c):fs) = (allDsj fs)
+allDsj ((Neg(Prop c)):fs) = (allDsj fs)
+
+
+allLit::[Form] -> Bool
+allLit [] = True
+allLit ((Dsj f):fs) = (allLit f) && (allLit fs)
+allLit ((Prop f):fs) = allLit fs
+allLit ((Neg(Prop f)):fs) = allLit fs
+allLit _ = False
+
+
+tester::[Form] -> (Form -> Bool) -> IO ()
+tester [] _ = putStrLn "All tested"
 tester (f:fs) p = do
         tester fs p
         if p f then putStrLn "Test passed"
@@ -80,8 +104,13 @@ generateListForms x = do
 
 testForms:: (Form -> Bool) -> IO ()
 testForms f = do
-        ys <- generateListForms 10
-        (tester ys f)--}
+        ys <- generateListForms 5
+        (tester ys f)
+
+main1 = testForms property1
+main2 = testForms property2
+
+--To start the testing, just write main1 or main2, it may take some time
 
 --Time spent: 5 hours
 
