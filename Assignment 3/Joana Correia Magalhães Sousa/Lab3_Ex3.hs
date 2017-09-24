@@ -30,7 +30,22 @@ convert (Dsj[f1,f2]) = deMorgan f1 f2
 convert f = f
 
 cnf:: Form -> Form
-cnf = convert . nnf . arrowfree
+cnf = toStart . convert . nnf . arrowfree
+
+allNormal::[Form] -> [Form]
+allNormal [] = []
+allNormal ((Cnj f):fs) = ((allNormal f)++(allNormal fs))
+allNormal ((Dsj f):fs) = ([Dsj(allNormalDsj f)]++(allNormal fs))
+allNormal (f:fs) = (f:(allNormal fs))
+
+allNormalDsj::[Form] -> [Form]
+allNormalDsj [] = []
+allNormalDsj ((Dsj f):fs) = ((allNormalDsj f)++(allNormalDsj fs))
+allNormalDsj (f:fs) = (f:(allNormalDsj fs))
+
+toStart::Form -> Form
+toStart (Cnj f) = (Cnj(allNormal f))
+toStart f =f 
 
 
 --Time spent: 4 hours
