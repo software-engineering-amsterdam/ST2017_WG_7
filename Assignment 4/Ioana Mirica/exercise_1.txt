@@ -1,0 +1,14 @@
+The Haskell Road -> Chapter 4 - Sets, Types and Lists
+-----------------------------------------------------
+
+1. The Russell Paradox -> how does this work...? (the explanation was confusing)
+2. funny x | halts x x = undefined     -- Caution: this
+		   | otherwise = True          -- will not work
+How is it decided on which branch will it go?
+3. Exercise 4.8 Explain the following error message:
+	Prelude> elem 1 1
+	ERROR: [a] is not an instance of class "Num"
+Because the number is checked over a list of numbers (and the second 1 is a number itself, not a list)?
+4. Remark. pag 134 -> Everything is a mamber of what? (I don't get it)
+
+Time spent: 1h45min
