@@ -25,19 +25,20 @@ setUnion:: Ord a => Set a -> Set a -> Set a
 setUnion = unionSet
 
 --------------------------Properties-----------------------------------
+--Each element of the result Set must belong in both given sets
 propertyInter:: Ord a => Set a -> Set a -> Bool
 propertyInter s1 s2 = (subSet result s1) && (subSet result s2)
                       where result = setIntersection s1 s2 
 
-
+--The result set must contain all elements from both given sets
 propertyUnion:: Ord a => Set a -> Set a -> Bool
 propertyUnion s1 s2 = (subSet s1 result) && (subSet s2 result)
                       where result = setUnion s1 s2 
 
---This property is not working correctly
+--The result set must contain all elements from the first given set 
+--that does not belong to the second given set
 propertyDiff:: Ord a => Set a -> Set a -> Bool
-propertyDiff (Set []) (Set []) = True
-propertyDiff s1 s2 = (subSet result s1) && (not(subSet result s2))
+propertyDiff s1 s2 = if (result == (Set [])) then True else(subSet result s1) && (not(subSet result s2))
                       where result = setDifference s1 s2 
 
 -------------------------Testing---------------------------------------
@@ -64,6 +65,7 @@ Test passed
 Test passed
 ...
 Test passed 
+*Lab4_Ex3>
 (all tests passed)
 
 *Lab4_Ex3> testSets propertyUnion
@@ -72,16 +74,28 @@ Test passed
 Test passed
 ...
 Test passed 
+*Lab4_Ex3>
+(all tests passed)
+
+*Lab4_Ex3> testSets propertyDiff
+All tested
+Test passed
+Test passed
+...
+Test passed
+*Lab4_Ex3>
 (all tests passed)
 
 
 *Lab4_Ex3> quickCheck propertyInter
 +++ OK, passed 100 tests.
-
+*Lab4_Ex3>
 *Lab4_Ex3> quickCheck propertyUnion
 +++ OK, passed 100 tests.
-
-
+*Lab4_Ex3>
+*Lab4_Ex3> quickCheck propertyDiff
++++ OK, passed 100 tests.
+*Lab4_Ex3>
 --}
 
 --Time spent: 3 hours
