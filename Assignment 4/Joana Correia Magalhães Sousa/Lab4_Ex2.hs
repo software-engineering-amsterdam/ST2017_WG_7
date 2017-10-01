@@ -32,6 +32,6 @@ main2 = sample (arbitrary::Gen(Set Int))
 
 
 --To run the generators, write 'main' and/or 'main2'
---Time spent: 6 hours
+--Time spent: 6 hours 
 --Most of the time spent on this exercise was to try to understand how
 --to work with quickcheck generator
