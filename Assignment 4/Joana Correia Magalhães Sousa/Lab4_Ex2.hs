@@ -22,7 +22,7 @@ generateListSets x = do
         return (f:fs)
 
 
-instance Arbitrary a => Arbitrary (Set a) where
+instance (Ord a, Arbitrary a) => Arbitrary (Set a) where
   arbitrary = do x <- arbitrary 
                  return (list2set x)
                  
