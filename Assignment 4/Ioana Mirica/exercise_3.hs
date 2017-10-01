@@ -29,3 +29,5 @@ setsDifference (Set (x:xs)) set_b
 forIntersection set_a set_b = if (subSet intersection set_a) == True && (subSet intersection set_b) == True then True else False where intersection = setsIntersection set_a set_b
 forUnion set_a set_b = if (subSet set_a union) == True && (subSet set_b union) == True then True else False where union = setsUnion set_a set_b
 forDifference set_a set_b = if (subSet difference set_a) == True && (subSet difference set_b) == False then True else False where difference = setsDifference set_a set_b
+
+--Time spent: 5h15min
