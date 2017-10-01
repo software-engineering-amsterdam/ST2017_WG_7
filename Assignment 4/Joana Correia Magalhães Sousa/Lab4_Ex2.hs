@@ -24,7 +24,7 @@ generateListSets x = do
 
 instance Arbitrary a => Arbitrary (Set a) where
   arbitrary = do x <- arbitrary 
-                 return (Set x)
+                 return (list2set x)
                  
 
 main = generateListSets 100
