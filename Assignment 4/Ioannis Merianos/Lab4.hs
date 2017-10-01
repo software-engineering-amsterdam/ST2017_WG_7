@@ -23,13 +23,13 @@ import Test.QuickCheck.Arbitrary
 
 genSetInt = do
 			a <- genIntList
-			return (Set a)
+			return (Set $ sort $ nub a)
             
 
   
 aa = generate (arbitrary :: Gen [Int])
 ct = do ac <- generate (arbitrary :: Gen [Int]) 
-        return (Set ac)
+        return (Set $ sort $ nub ac)
 
         
 ------------------ Exercise 3----------------------
@@ -44,9 +44,9 @@ isdifference (Set xs) (Set ys) = Set[x | x <- xs, not (elem x ys)]
 ex3 = do 
         ac1 <- generate (arbitrary :: Gen [Int])
         ac2 <- generate (arbitrary :: Gen [Int])
-        print $ show $ nub ac1
-        print $ show $ nub  ac2
-        return $ isintersection(Set ac1) (Set ac2)
+        print $ show $ sort $ nub ac1
+        print $ show $ sort $ nub  ac2
+        return $ isintersection(Set $ sort $ nub ac1) (Set $ sort $ nub ac2)
         -- "[-11,16,7,-16,12,18,-6,-28,-25,8,11,-27,1,10,-5,-21,-12]"
         -- "[29,2,-28]"
         -- {-28}
