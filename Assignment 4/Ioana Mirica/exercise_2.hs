@@ -14,10 +14,10 @@ random_list n = do r <- getStdRandom (randomR (0, 100))
 
 random_data_generator = do rnd_length <- getStdRandom (randomR (0, 100))
                            list <- random_list rnd_length
-                           return (Set list)
+                           return (list2set list)
 
 instance Arbitrary a => Arbitrary (Set a) where arbitrary = do l <- arbitrary
-                                                               return (Set l)
+                                                               return (list2set l)
 						   
 random_test_quickCheck = generate arbitrary :: IO (Set Int)
 
